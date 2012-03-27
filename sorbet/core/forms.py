@@ -35,13 +35,9 @@ class EmailUserCreationForm(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         try:
-            user = User.objects.get(email=username)
-            if user.get_profile().invited:
-                return username
+            User.objects.get(email=username)
         except User.DoesNotExist:
-            pass
-
-        raise forms.ValidationError("You haven't been invited yet.")
+            return username
 
     def clean(self):
         return super(EmailUserCreationForm, self).clean()
