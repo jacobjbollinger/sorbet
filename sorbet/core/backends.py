@@ -1,0 +1,25 @@
+from django.contrib.auth.models import User, check_password
+
+
+class EmailAuthBackend(object):
+    """Email Authentication Backend
+
+    Allows users to sign in using email/password pair.
+    """
+
+    supports_anonymous_user = False
+    supports_object_permissions = False
+
+    def authenticate(self, username=None, password=None):
+        try:
+            user = User.objects.get(email=username)
+            if user.check_password(password):
+                return user
+        except User.DoesNotExist:
+            return None
+
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None

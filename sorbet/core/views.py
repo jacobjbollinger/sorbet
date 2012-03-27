@@ -1,5 +1,4 @@
 from django.template.response import TemplateResponse
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.http import HttpResponseRedirect
@@ -9,6 +8,7 @@ from django.contrib.auth import authenticate, logout
 
 from .models import Feed
 from .forms import FeedForm
+from .forms import EmailUserCreationForm
 
 
 def home(request):
@@ -22,7 +22,7 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = EmailUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'New user created! Thank you for trying out Sorbet.')
@@ -30,7 +30,7 @@ def register(request):
         else:
             messages.error(request, 'There was a problem creating your user, please fix the items marked below.')
     else:
-        form = UserCreationForm()
+        form = EmailUserCreationForm()
 
     template = u'core/register.html'
     context = {

@@ -78,3 +78,5 @@ INSTALLED_APPS = (
     'south',
     'sorbet.core',
 )
+
+AUTHENTICATION_BACKENDS = ['core.backends.EmailAuthBackend']
