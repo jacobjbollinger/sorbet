@@ -8,9 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout
 
 from .models import Feed
+from .forms import FeedForm
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('core:feeds'))
+
     template = u'core/home.html'
     context = None
     return TemplateResponse(request, template, context)
@@ -22,7 +26,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'New user created! Thank you for trying out Sorbet.')
-            return HttpResponseRedirect(reverse('core:profile'))
+            return HttpResponseRedirect(reverse('core:feeds'))
         else:
             messages.error(request, 'There was a problem creating your user, please fix the items marked below.')
     else:
@@ -44,10 +48,16 @@ def logout_user(request):
 
 @login_required
 def feeds(request):
+    if request.method == 'POST':
+        form = FeedForm(request.POST)
+    else:
+        form = FeedForm()
+
     feeds = Feed.objects.filter(users=request.user)
 
     template = u'core/feeds.html'
     context = {
+        'form': form,
         'feeds': feeds,
     }
     return TemplateResponse(request, template, context)

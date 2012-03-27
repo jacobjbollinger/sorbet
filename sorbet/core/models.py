@@ -2,16 +2,24 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
+from urllib2 import urlopen
+from bs4 import BeautifulSoup
+
 
 class Feed(models.Model):
     users = models.ManyToManyField(User)
-    url = models.CharField(_('url'), max_length=128)
+    url = models.CharField(_('URL'), max_length=128)
     title = models.CharField(_('title'), max_length=70)
     added = models.DateTimeField(_('added'), auto_now_add=True)
-    last_updated = models.DateTimeField(_('last updated'))
+    last_updated = models.DateTimeField(_('last updated'), blank=True, null=True)
 
     def __unicode__(self):
         return self.title
+
+    def save(self):
+        soup = BeautifulSoup(urlopen(self.url).read())
+        self.title = soup.title.string
+        super(Feed, self).save()
 
 
 class Item(models.Model):

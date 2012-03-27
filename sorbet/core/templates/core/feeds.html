@@ -6,6 +6,14 @@
     <div class="container">
         <div class="row">
             <div class="span12">
+                <form action="{% url core:feeds %}" method="POST">{% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" name="submit" id="id_submit" value="Submit" class="btn btn-primary" />
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
                 <ul>
                     {% if feeds %}
                         {% for feed in feeds %}

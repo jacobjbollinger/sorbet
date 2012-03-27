@@ -5,14 +5,11 @@
 {% block yield %}
     <div class="container">
         <div class="row">
-            <div class="span6">
+            <div class="span12">
                 <form action="{% url core:register %}" method="POST">{% csrf_token %}
                     {{ form.as_p }}
                     <input type="submit" class="btn btn-primary" name="submit" value="Submit" id="id_submit" />
                 </form>
-            </div>
-            <div class="span6">
-                <p>Create your user to get started!</p>
             </div>
         </div>
     </div>
