@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Feed
 from .forms import FeedForm
@@ -27,8 +28,6 @@ def register(request):
             form.save()
             messages.success(request, 'New user created! Thank you for trying out Sorbet.')
             return HttpResponseRedirect(reverse('core:feeds'))
-        else:
-            messages.error(request, 'There was a problem creating your user, please fix the items marked below.')
     else:
         form = EmailUserCreationForm()
 
@@ -50,6 +49,14 @@ def logout_user(request):
 def feeds(request):
     if request.method == 'POST':
         form = FeedForm(request.POST)
+        if form.is_valid():
+            try:
+                feed = Feed.objects.get(url=form.clean_url())
+            except ObjectDoesNotExist:
+                feed = form.save(request.user)
+            feed.users.add(request.user)
+            messages.success(request, 'New feed added successfully!')
+            form = FeedForm()
     else:
         form = FeedForm()
 
