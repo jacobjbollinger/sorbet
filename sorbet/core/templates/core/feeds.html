@@ -1,0 +1,21 @@
+{% extends "core/core.html" %}
+
+{% block title %}Sorbet - Feed Panel{% endblock %}
+
+{% block yield %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <ul>
+                    {% if feeds %}
+                        {% for feed in feeds %}
+                            <li>{{ feed.title }} - {{ feed.url }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>You have no feeds, start adding some! Try our featured section if you don't have any ideas.</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -5,29 +5,55 @@
 
         <link rel="stylesheet" type="text/css" href="/static/core/css/lib/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="/static/core/css/lib/bootstrap-responsive.min.css">
+        <link rel="stylesheet" type="text/css" href="/static/core/css/sorbet.css">
     </head>
 
     <body>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
+        <div class="container">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
 
-                    <a href="{% url core:home %}" class="brand">Sorbet</a>
+                        <a href="{% url core:home %}" class="brand">Sorbet</a>
 
-                    <div class="nav-collapse">
-                        <ul class="nav pull-right">
-                            <li><a href="{% url core:register %}">Register</a></li>
-                            <li><a href="{% url core:login %}">Login</a></li>
-                        </ul>
+                        <div class="nav-collapse">
+                            <ul class="nav pull-right">
+                                {% if user.is_authenticated %}
+                                    <li><a href="{% url core:featured %}">Featured</a></li>
+                                    <li><a href="{% url core:feeds %}">Feeds</a></li>
+                                    <li><a href="{% url core:logout %}">Logout</a></li>
+                                {% else %}
+                                    <li><a href="{% url core:register %}">Register</a></li>
+                                    <li><a href="{% url core:login %}">Login</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        {% if messages %}
+        <div class="container">
+            <div class="row">
+                <div class="span6 offset3">
+                    <ul class="unstyled">
+                        {% for message in messages %}
+                            <li class="alert alert-{{ message.tags }}">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
         {% block yield %}{% endblock %}
 

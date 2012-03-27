@@ -41,6 +41,7 @@ ROOT_URLCONF = 'sorbet.urls'
 WSGI_APPLICATION = 'sorbet.wsgi.application'
 ADMINS = [('Isaac Bythewood', 'isaac@bythewood.me')]
 MANAGERS = ADMINS
+LOGIN_REDIRECT_URL = '/feeds/'
 
 
 LOGGING = {
