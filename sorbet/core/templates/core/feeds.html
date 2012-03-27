@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="span12">
-                <form action="{% url core:feeds %}" method="POST">{% csrf_token %}
+                <form action="{% url core:add-feed %}" method="POST">{% csrf_token %}
                     {{ form.as_p }}
                     <input type="submit" name="submit" id="id_submit" value="Submit" class="btn btn-primary" />
                 </form>
@@ -14,15 +14,34 @@
         </div>
         <div class="row">
             <div class="span12">
-                <ul>
-                    {% if feeds %}
-                        {% for feed in feeds %}
-                            <li>{{ feed.title }} - {{ feed.url }}</li>
-                        {% endfor %}
-                    {% else %}
-                        <li>You have no feeds, start adding some! Try our featured section if you don't have any ideas.</li>
-                    {% endif %}
-                </ul>
+                {% if feeds %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="span3">Title</th>
+                                <th class="span6">URL</th>
+                                <th class="span2">Last Updated</th>
+                                <th class="span1">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for feed in feeds %}
+                                <tr>
+                                    <td>{{ feed.title }}</td>
+                                    <td>{{ feed.url }}</td>
+                                    <td>{{ feed.last_updated }}</td>
+                                    <td>
+                                        <a href="{% url core:remove-feed feed.id %}">
+                                            <i class="icon-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h4>You have no feeds, start adding some! Try our featured section if you don't have any ideas.</h4>
+                {% endif %}
             </div>
         </div>
     </div>

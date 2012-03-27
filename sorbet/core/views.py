@@ -46,7 +46,27 @@ def logout_user(request):
 
 
 @login_required
+def featured(request):
+    template = u'core/featured.html'
+    context = None
+    return TemplateResponse(request, template, context)
+
+
+@login_required
 def feeds(request):
+    feeds = Feed.objects.filter(users=request.user)
+    form = FeedForm()
+
+    template = u'core/feeds.html'
+    context = {
+        'feeds': feeds,
+        'form': form,
+    }
+    return TemplateResponse(request, template, context)
+
+
+@login_required
+def add_feed(request):
     if request.method == 'POST':
         form = FeedForm(request.POST)
         if form.is_valid():
@@ -56,22 +76,17 @@ def feeds(request):
                 feed = form.save(request.user)
             feed.users.add(request.user)
             messages.success(request, 'New feed added successfully!')
-            form = FeedForm()
-    else:
-        form = FeedForm()
-
-    feeds = Feed.objects.filter(users=request.user)
-
-    template = u'core/feeds.html'
-    context = {
-        'form': form,
-        'feeds': feeds,
-    }
-    return TemplateResponse(request, template, context)
+            return HttpResponseRedirect(reverse('core:feeds'))
+        else:
+            messages.error(request, 'Feed could not be added. We currently only support RSS feeds, make sure it is not an ATOM feed.')
+            return HttpResponseRedirect(reverse('core:feeds'))
 
 
 @login_required
-def featured(request):
-    template = u'core/featured.html'
-    context = None
-    return TemplateResponse(request, template, context)
+def remove_feed(request, feed_id):
+    feed = Feed.objects.get(id=feed_id)
+    feed.users.remove(request.user)
+    if len(feed.users.all()) == 0:
+        feed.delete()
+    messages.success(request, 'Feed successfully removed from your list!')
+    return HttpResponseRedirect(reverse('core:feeds'))
