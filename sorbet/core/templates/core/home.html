@@ -1,0 +1,37 @@
+{% extends "core/core.html" %}
+
+{% block title %}Sorbet, a simple RSS feed sender.{% endblock %}
+
+{% block yield %}
+    <div class="container">
+        <div class="row">
+            <div class="span6">
+                <h3>What Sorbet Is</h3>
+                <p>Sorbet is a simple RSS feed fetcher/parser and sender, it
+                    takes and RSS feed and sends it to your inbox whenever it
+                    gets updated.</p>
+                <h3>What Sorbet Isn't</h3>
+                <p>A "feed reader" in the usual sense, you can setup the feeds
+                    you want and check on their status but your email client
+                    is technically your feed reader now.</p>
+            </div>
+            <div class="span6">
+                <h3>Why Another Feed Reader?</h3>
+                <p>I've been all over the internets and have consumed enough
+                    data. I have a very small selection of feeds I wish to read
+                    on a regular basis and those feeds I <em>never</em> want to
+                    miss a single post on. Most feed readers are built for quick
+                    browsing massive amounts of feeds. My email is built so that
+                    I am garenteed to see every email/post and read it. Why
+                    reinvent the wheel, just sent them to something I already
+                    use.</p>
+            </div>
+            <div class="row">
+                <div class="span6 offset6">
+                    <a href="/register/" class="btn btn-primary">Register Account</a>
+                    <a href="/login/" class="btn btn-primary">Login to Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

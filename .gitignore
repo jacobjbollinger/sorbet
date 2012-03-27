@@ -1,0 +1,7 @@
+#virtualenv
+/Include/
+/Lib/
+/Scripts/
+
+# python
+*.pyc
