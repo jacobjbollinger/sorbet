@@ -1,7 +1,10 @@
-#virtualenv
+# virtualenv
 /Include/
 /Lib/
 /Scripts/
 
 # python
 *.pyc
+
+# development database
+/sorbet/settings/development.db
