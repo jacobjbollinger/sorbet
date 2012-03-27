@@ -5,10 +5,15 @@
 {% block yield %}
     <div class="container">
         <div class="row">
-            <div class="span12">
+            <div class="span4">
+                <h2>Your Feed List</h2>
+            </div>
+            <div class="span8">
                 <form action="{% url core:add-feed %}" method="POST">{% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" name="submit" id="id_submit" value="Submit" class="btn btn-primary" />
+                    <div class="input-append" align="right">
+                        <input id="id_url" type="text" name="url" maxlength="128" />
+                        <input type="submit" name="submit" id="id_submit" value="Add Feed URL" class="btn btn-primary pull-right" />
+                    </div>
                 </form>
             </div>
         </div>
