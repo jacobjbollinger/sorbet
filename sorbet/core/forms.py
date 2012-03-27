@@ -1,10 +1,14 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 
 from urllib2 import urlopen
 from bs4 import BeautifulSoup
 
 from .models import Feed
 
+_ = lambda x: x
 
 class FeedForm(forms.ModelForm):
     def clean(self):
