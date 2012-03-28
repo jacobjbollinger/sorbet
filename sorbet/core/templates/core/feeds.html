@@ -33,7 +33,7 @@
                             {% for feed in feeds %}
                                 <tr>
                                     <td>{{ feed.title }}</td>
-                                    <td>{{ feed.url }}</td>
+                                    <td><a href="{{ feed.url }}">{{ feed.url }}</a></td>
                                     <td>{{ feed.last_updated }}</td>
                                     <td>
                                         <a href="{% url core:remove-feed feed.id %}">
