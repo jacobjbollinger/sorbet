@@ -6,10 +6,24 @@
     <div class="container">
         <div class="row">
             <div class="span12">
+                <h1>We need you to register to use sorbet.</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <p>Please fill out the following information:</p>
                 <form action="{% url core:register %}" method="POST">{% csrf_token %}
                     {{ form.as_p }}
                     <input type="submit" class="btn btn-primary" name="submit" value="Submit" id="id_submit" />
                 </form>
+            </div>
+            <div class="span6">
+                <h3>Sorbet loves you!</h3>
+                <p>We will never give away your personal information and we only
+                    ask for the bare minimum for our service to work. If you
+                    still don't trust us with it feel free to checkout our code
+                    on GitHub and even run Sorbet on your own webserver. It's
+                    all free and opensource.
             </div>
         </div>
     </div>
