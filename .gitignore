@@ -6,5 +6,7 @@
 # python
 *.pyc
 
-# development database
-/sorbet/settings/development.db
+# django created items
+/media/
+/static/
+/development.db

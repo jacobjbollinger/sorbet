@@ -1,7 +1,7 @@
 from os.path import dirname, realpath, join
 
 
-SITE_ROOT = join(dirname(realpath(__file__)), '../')
+SITE_ROOT = join(dirname(realpath(__file__)), '../../')
 
 
 TIME_ZONE = 'America/New_York'
