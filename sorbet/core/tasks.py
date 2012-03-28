@@ -33,5 +33,6 @@ def fetch_feed_items(feed):
             new_item.save()
             # TODO: Run task to send item to everyone subscribing to feed.
 
+    feed.last_updated = datetime(*(parsed_feed.updated_parsed[0:6]))
     feed.last_checked = datetime.now()
     feed.save()
