@@ -15,9 +15,9 @@ USE_L10N = True
 USE_TZ = True
 
 
-MEDIA_ROOT = ''
-MEDIA_URL = ''
-STATIC_ROOT = ''
+MEDIA_ROOT = join(SITE_ROOT, 'media/')
+MEDIA_URL = '/media/'
+STATIC_ROOT = join(SITE_ROOT, 'static/')
 STATIC_URL = '/static/'
 
 
