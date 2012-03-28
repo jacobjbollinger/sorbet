@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, logout
+from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Feed
