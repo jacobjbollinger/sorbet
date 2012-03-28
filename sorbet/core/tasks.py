@@ -1,4 +1,3 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.utils.timezone import now as tz_utcnow
 from django.utils.timezone import utc 
 
@@ -22,7 +21,7 @@ def fetch_feed_items(feed):
     for item in parsed_feed.entries:
         try:
             Item.objects.get(feed=feed, guid=item.guid)
-        except ObjectDoesNotExist:
+        except Item.DoesNotExist:
             new_item = Item(
                 feed = feed,
                 pubdate = datetime(*(item.published_parsed[0:6]), tzinfo=utc),

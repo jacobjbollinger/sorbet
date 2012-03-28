@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Feed
 from .forms import FeedForm
@@ -72,7 +71,7 @@ def add_feed(request):
         if form.is_valid():
             try:
                 feed = Feed.objects.get(url=form.clean_url())
-            except ObjectDoesNotExist:
+            except Feed.DoesNotExist:
                 feed = form.save(request.user)
             feed.users.add(request.user)
             messages.success(request, 'New feed added successfully!')
