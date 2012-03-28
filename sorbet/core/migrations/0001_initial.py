@@ -14,7 +14,8 @@ class Migration(SchemaMigration):
             ('url', self.gf('django.db.models.fields.CharField')(max_length=128)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=70)),
             ('added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('last_updated', self.gf('django.db.models.fields.DateTimeField')()),
+            ('last_checked', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
+            ('last_updated', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
         ))
         db.send_create_signal('core', ['Feed'])
 
@@ -30,8 +31,12 @@ class Migration(SchemaMigration):
         db.create_table('core_item', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('feed', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Feed'])),
-            ('published', self.gf('django.db.models.fields.DateTimeField')()),
             ('added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('pubdate', self.gf('django.db.models.fields.DateTimeField')()),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=70)),
+            ('link', self.gf('django.db.models.fields.CharField')(max_length=128)),
+            ('description', self.gf('django.db.models.fields.TextField')()),
+            ('guid', self.gf('django.db.models.fields.CharField')(max_length=128)),
         ))
         db.send_create_signal('core', ['Item'])
 
@@ -86,7 +91,8 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Feed'},
             'added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_updated': ('django.db.models.fields.DateTimeField', [], {}),
+            'last_checked': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'last_updated': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '70'}),
             'url': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'users': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False'})
@@ -94,9 +100,13 @@ class Migration(SchemaMigration):
         'core.item': {
             'Meta': {'object_name': 'Item'},
             'added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {}),
             'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Feed']"}),
+            'guid': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'published': ('django.db.models.fields.DateTimeField', [], {})
+            'link': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'pubdate': ('django.db.models.fields.DateTimeField', [], {}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '70'})
         }
     }
 

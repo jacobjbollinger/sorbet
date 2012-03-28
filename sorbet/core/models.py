@@ -11,6 +11,7 @@ class Feed(models.Model):
     url = models.CharField(_('URL'), max_length=128)
     title = models.CharField(_('title'), max_length=70)
     added = models.DateTimeField(_('added'), auto_now_add=True)
+    last_checked = models.DateTimeField(_('last checked'), blank=True, null=True)
     last_updated = models.DateTimeField(_('last updated'), blank=True, null=True)
 
     def __unicode__(self):
@@ -24,8 +25,12 @@ class Feed(models.Model):
 
 class Item(models.Model):
     feed = models.ForeignKey(Feed)
-    published = models.DateTimeField(_('published'))
     added = models.DateTimeField(_('added'), auto_now_add=True)
+    pubdate = models.DateTimeField(_('published'))
+    title = models.CharField(_('title'), max_length=70)
+    link = models.CharField(_('link'), max_length=128)
+    description = models.TextField(_('description'))
+    guid = models.CharField(_('GUID'), max_length=128)
 
     def __unicode__(self):
-        return self.feed
+        return self.title
