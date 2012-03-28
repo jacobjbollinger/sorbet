@@ -1,4 +1,8 @@
 from os.path import dirname, realpath, join
+import djcelery
+
+
+djcelery.setup_loader()
 
 
 SITE_ROOT = join(dirname(realpath(__file__)), '../../')
@@ -76,6 +80,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
+    'djcelery',
     'sorbet.core',
 )
 
