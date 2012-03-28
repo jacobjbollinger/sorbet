@@ -15,6 +15,7 @@ def fetch_all_feeds():
     for feed in feeds:
         fetch_feed_items(feed)
 
+
 @task
 def fetch_feed_items(feed):
     parsed_feed = parse(feed.url)
@@ -30,7 +31,7 @@ def fetch_feed_items(feed):
                 description = item.summary,
                 guid = item.id,
             )
-            #new_item.save()
+            new_item.save()
             # TODO: Run task to send item to everyone subscribing to feed.
 
     feed.last_updated = datetime(*(parsed_feed.updated_parsed[0:6]), tzinfo=utc)

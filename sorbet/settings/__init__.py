@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'south',
     'djcelery',
     'sorbet.core',
+    'sorbet.feedmanager',
 )
 
 AUTHENTICATION_BACKENDS = ['sorbet.core.backends.EmailAuthBackend']

@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Feed'
-        db.create_table('core_feed', (
+        db.create_table('feedmanager_feed', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('url', self.gf('django.db.models.fields.CharField')(max_length=128)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=70)),
@@ -17,20 +17,20 @@ class Migration(SchemaMigration):
             ('last_checked', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
             ('last_updated', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
         ))
-        db.send_create_signal('core', ['Feed'])
+        db.send_create_signal('feedmanager', ['Feed'])
 
         # Adding M2M table for field users on 'Feed'
-        db.create_table('core_feed_users', (
+        db.create_table('feedmanager_feed_users', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('feed', models.ForeignKey(orm['core.feed'], null=False)),
+            ('feed', models.ForeignKey(orm['feedmanager.feed'], null=False)),
             ('user', models.ForeignKey(orm['auth.user'], null=False))
         ))
-        db.create_unique('core_feed_users', ['feed_id', 'user_id'])
+        db.create_unique('feedmanager_feed_users', ['feed_id', 'user_id'])
 
         # Adding model 'Item'
-        db.create_table('core_item', (
+        db.create_table('feedmanager_item', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('feed', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Feed'])),
+            ('feed', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['feedmanager.Feed'])),
             ('added', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('pubdate', self.gf('django.db.models.fields.DateTimeField')()),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=70)),
@@ -38,17 +38,17 @@ class Migration(SchemaMigration):
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('guid', self.gf('django.db.models.fields.CharField')(max_length=128)),
         ))
-        db.send_create_signal('core', ['Item'])
+        db.send_create_signal('feedmanager', ['Item'])
 
     def backwards(self, orm):
         # Deleting model 'Feed'
-        db.delete_table('core_feed')
+        db.delete_table('feedmanager_feed')
 
         # Removing M2M table for field users on 'Feed'
-        db.delete_table('core_feed_users')
+        db.delete_table('feedmanager_feed_users')
 
         # Deleting model 'Item'
-        db.delete_table('core_item')
+        db.delete_table('feedmanager_item')
 
     models = {
         'auth.group': {
@@ -87,7 +87,7 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'core.feed': {
+        'feedmanager.feed': {
             'Meta': {'object_name': 'Feed'},
             'added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -97,11 +97,11 @@ class Migration(SchemaMigration):
             'url': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'users': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'symmetrical': 'False'})
         },
-        'core.item': {
+        'feedmanager.item': {
             'Meta': {'object_name': 'Item'},
             'added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {}),
-            'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Feed']"}),
+            'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['feedmanager.Feed']"}),
             'guid': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
@@ -110,4 +110,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['core']
+    complete_apps = ['feedmanager']

@@ -20,7 +20,7 @@
                     <div class="span4">
                         <h3>XKCD</h3>
                         <p>A webcomic of romance and math humor.</p>
-                        <form action="{% url core:add-feed %}" method="POST">{% csrf_token %}
+                        <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
                             <input id="id_url" type="hidden" name="url" value="http://xkcd.com/rss.xml">
                             <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
                         </form>
@@ -28,7 +28,7 @@
                     <div class="span4">
                         <h3>You Look Nice Today</h3>
                         <p>You Look Nice Today is an audio-based Journal of Emotional Hygiene, staffed by lonelysandwich, scottsimpson, and hotdogsladies.</p>
-                        <form action="{% url core:add-feed %}" method="POST">{% csrf_token %}
+                        <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
                             <input id="id_url" type="hidden" name="url" value="http://feeds.feedburner.com/YouLookNiceToday">
                             <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
                         </form>
@@ -38,7 +38,7 @@
                     <div class="span4">
                         <h3>Team Liquid News</h3>
                         <p>Featured news from Team Liquid, a StarCraft gaming community.</p>
-                        <form action="{% url core:add-feed %}" method="POST">{% csrf_token %}
+                        <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
                             <input id="id_url" type="hidden" name="url" value="http://www.teamliquid.net/rss/news.xml">
                             <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
                         </form>

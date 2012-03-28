@@ -1,6 +1,6 @@
 {% extends "core/core.html" %}
 
-{% block title %}Sorbet - Feed Panel{% endblock %}
+{% block title %}Sorbet - Feed Manager{% endblock %}
 
 {% block yield %}
     <div class="container">
@@ -9,7 +9,7 @@
                 <h2>Your Feed List</h2>
             </div>
             <div class="span8">
-                <form action="{% url core:add-feed %}" method="POST">{% csrf_token %}
+                <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
                     <div class="input-append" align="right">
                         <input id="id_url" type="text" name="url" maxlength="128" />
                         <input type="submit" name="submit" id="id_submit" value="Add Feed URL" class="btn btn-primary pull-right" />
@@ -38,7 +38,7 @@
                                     <td>{{ feed.last_updated }}</td>
                                     <td>{{ feed.last_checked }}</td>
                                     <td>
-                                        <a href="{% url core:remove-feed feed.id %}">
+                                        <a href="{% url feedmanager:remove-feed feed.id %}">
                                             <i class="icon-trash"></i>
                                         </a>
                                     </td>

@@ -24,8 +24,8 @@
                         <div class="nav-collapse">
                             <ul class="nav pull-right">
                                 {% if user.is_authenticated %}
-                                    <li><a href="{% url core:featured %}">Featured</a></li>
-                                    <li><a href="{% url core:feeds %}">Feeds</a></li>
+                                    <li><a href="{% url feedmanager:featured %}">Featured</a></li>
+                                    <li><a href="{% url feedmanager:feeds %}">Feeds</a></li>
                                     <li><a href="{% url core:logout %}">Logout</a></li>
                                 {% else %}
                                     <li><a href="{% url core:register %}">Register</a></li>
