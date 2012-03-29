@@ -27,12 +27,12 @@ def featured(request):
 
 @login_required
 def feeds(request):
-    feeds = Feed.objects.filter(users=request.user)
-    form = FeedForm()
-
-    if search('/accounts/login/$', request.META['HTTP_REFERER']) and not feeds:
+    if search('/accounts/register/$', request.META['HTTP_REFERER']):
         return HttpResponseRedirect(
             ''.join([reverse('feedmanager:featured'), '?nofeed=true']))
+
+    feeds = Feed.objects.filter(users=request.user)
+    form = FeedForm()
 
     template = u'feedmanager/feeds.html'
     context = {
