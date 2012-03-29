@@ -19,8 +19,9 @@ class Feed(models.Model):
         return self.title
 
     def save(self):
-        soup = BeautifulSoup(urlopen(self.url).read())
-        self.title = soup.title.string
+        if not self.title:
+            soup = BeautifulSoup(urlopen(self.url).read())
+            self.title = soup.title.string
         super(Feed, self).save()
 
 
