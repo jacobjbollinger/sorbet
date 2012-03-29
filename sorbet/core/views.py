@@ -21,7 +21,11 @@ def register(request):
     if request.method == 'POST':
         form = EmailUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            from django.contrib.auth import login
+            user = form.save()
+            user.is_active = True
+            user.backend = "sorbet.core.backends.EmailAuthBackend"
+            login(request, user)
             messages.success(request, 'New user created! Thank you for trying out Sorbet.')
             return HttpResponseRedirect(reverse('feedmanager:feeds'))
     else:
