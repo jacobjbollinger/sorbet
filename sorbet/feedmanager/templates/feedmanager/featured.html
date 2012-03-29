@@ -47,4 +47,29 @@
             </div>
         </div>
     </div>
+
+    {% if nofeed %}
+        <div class="modal fade" id="myModal">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Welcome to Sorbet!</h3>
+            </div>
+            <div class="modal-body">
+                <p>We noticed you have no feeds yet and brought you to our
+                    featured page as a way for you to quickly test our service.</p>
+                <p>When you add a feed for the first time you get a short
+                    "preview" email. You can then remove the feed or you will
+                    simply continue to receive updates.</p>
+            </div>
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-primary">Close</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $('#myModal').modal('show')
+    </script>
 {% endblock %}

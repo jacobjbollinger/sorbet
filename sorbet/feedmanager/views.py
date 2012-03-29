@@ -4,14 +4,24 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
+from re import search
+
 from .models import Feed
 from .forms import FeedForm
 
 
 @login_required
 def featured(request):
+    try:
+        if request.GET['nofeed'] == 'true': nofeed = True
+    except:
+        nofeed = False
+
+
     template = u'feedmanager/featured.html'
-    context = None
+    context = {
+        'nofeed': nofeed
+    }
     return TemplateResponse(request, template, context)
 
 
@@ -19,6 +29,10 @@ def featured(request):
 def feeds(request):
     feeds = Feed.objects.filter(users=request.user)
     form = FeedForm()
+
+    if search('/accounts/login/$', request.META['HTTP_REFERER']) and not feeds:
+        return HttpResponseRedirect(
+            ''.join([reverse('feedmanager:featured'), '?nofeed=true']))
 
     template = u'feedmanager/feeds.html'
     context = {

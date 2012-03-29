@@ -15,22 +15,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="span6">
+            <div class="span4">
                 <h3>What Sorbet Is</h3>
                 <p>Sorbet is a simple RSS feed fetcher/parser and sender, it
                     takes and RSS feed and sends it to your inbox whenever there
                     are updates.</p>
+            </div>
+            <div class="span4">
                 <h3>What Sorbet Isn't</h3>
                 <p>A "feed reader" in the usual sense, you can setup the feeds
                     you want and check on their status but your email client
                     is technically your feed reader now.</p>
             </div>
-            <div class="span6">
+            <div class="span4">
                 <h3>Why Sorbet</h3>
-                <p>I've been all over the internets and have consumed enough
-                    data. I have a very small selection of feeds I wish to read
-                    on a regular basis and those feeds I <em>never</em> want to
-                    miss a single post on. Most feed readers are built for quick
+                <p>Most feed readers are built for quick
                     browsing massive amounts of feeds. My email is built so that
                     I am garenteed to see every email/post and read it. Why
                     reinvent the wheel, just send them to something I already
@@ -38,9 +37,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="span12" align="center">
-                <p><a href="{% url core:register %}" class="btn btn-large btn-primary">Register New Account</a>
-                    <a href="{% url core:login %}" class="btn btn-large btn-primary">Login To Account</a></p>
+            <div class="span6">
+                <h3>Doesn't this service already exist?</h3>
+                <p>Yes, and it isn't free or open source. I feel like such a
+                    simple service should be accessible and hostable anywhere.
+                    This app was built in a few hours and I see no reason to
+                    charge monthly feeds in the 5 dollar plus range for that.
+                    I may in the future ask for donations or require a small
+                    signup fee but if you sign up now you'll always have a free
+                    account with us!
+            </div>
+            <div class="span6" align="right">
+                <h3>What are you waiting for? Get started!</h3>
+                <p>It's quick, easy, and painless... we think, we haven't
+                    experienced any pain yet...</p>
+                <p><a href="{% url core:register %}" class="btn btn-success">Register New Account</a></p>
+                <p><a href="{% url core:login %}" class="btn btn-primary">Login To Account</a></p>
             </div>
         </div>
     </div>
