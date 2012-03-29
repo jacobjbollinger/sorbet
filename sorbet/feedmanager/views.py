@@ -17,11 +17,7 @@ from .forms import FeedForm
 
 @login_required
 def featured(request):
-    try:
-        if request.GET['nofeed'] == 'true': nofeed = True
-    except:
-        nofeed = False
-
+    nofeed = True if request.GET.get("nofeed", None) else False
 
     template = u'feedmanager/featured.html'
     context = {
