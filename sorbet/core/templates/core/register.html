@@ -5,11 +5,6 @@
 {% block yield %}
     <div class="container">
         <div class="row">
-            <div class="span12">
-                <h1>We need you to register to use sorbet.</h1>
-            </div>
-        </div>
-        <div class="row">
             <div class="span6">
                 <p>Please fill out the following information:</p>
                 <form action="{% url core:register %}" method="POST">{% csrf_token %}
@@ -19,11 +14,14 @@
             </div>
             <div class="span6">
                 <h3>Sorbet loves you!</h3>
-                <p>We will never give away your personal information and we only
-                    ask for the bare minimum for our service to work. If you
-                    still don't trust us with it feel free to checkout our code
-                    on GitHub and even run Sorbet on your own webserver. It's
-                    all free and opensource.
+                <p>We will never give away your email address or use it for
+                    spamming. We try to store as little information as possible
+                    about you for this service to work. If you feel like you
+                    would rather run Sorbet yourself all of our code is
+                    opensource and on
+                    <a href="https://github.com/overshard/sorbet/">GitHub</a>.
+                    Feel free to start up a clone with your own
+                    customizations!</p>
             </div>
         </div>
     </div>
