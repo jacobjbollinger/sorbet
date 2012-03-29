@@ -82,6 +82,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'south',
     'djcelery',
+    'cronjobs',
     'sorbet.core',
     'sorbet.feedmanager',
 )

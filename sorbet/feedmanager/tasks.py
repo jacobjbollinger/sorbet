@@ -5,15 +5,7 @@ from celery.task import task
 from feedparser import parse
 from datetime import datetime
 
-from .models import Feed
 from .models import Item
-
-
-@task
-def fetch_all_feeds():
-    feeds = Feed.objects.all()
-    for feed in feeds:
-        fetch_feed_items(feed)
 
 
 @task
