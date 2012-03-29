@@ -4,7 +4,12 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
+import md5
+
+from bs4 import BeautifulSoup
 from re import search
+from urllib2 import urlopen
+from urlparse import urlparse
 
 from .models import Feed
 from .forms import FeedForm
@@ -52,10 +57,29 @@ def add_feed(request):
     if request.method == 'POST':
         form = FeedForm(request.POST)
         if form.is_valid():
+            # it's a very naive approach. we hash feeds' location with the username (if it's set)
+            # and then store the hash in database. this hash should be unique for each tuple
+            # (username, host, port). We then check feed's title to differentiate between feeds
+            # on the same page. XXX: this will probably break at some point so think of a better
+            # way to do that.
+            url = urlparse(form.clean_url())
+            feed_hash = md5.new(url.netloc)
+            if url.username:
+                feed_hash.update(url.username)
+            feed_hash = feed_hash.hexdigest()
             try:
-                feed = Feed.objects.get(url=form.clean_url())
+                feed = Feed.objects.get(hash=feed_hash)
             except Feed.DoesNotExist:
-                feed = form.save(request.user)
+                feed = form.save(commit=False)
+                feed.hash = feed_hash
+                feed.save()
+            else:
+                soup = BeautifulSoup(urlopen(form.clean_url()).read())
+                if soup.title.string != feed.title:
+                    feed.save()
+                else:
+                    messages.warning(request, 'Feed already on the list!')
+
             feed.users.add(request.user)
             messages.success(request, 'New feed added successfully!')
             return HttpResponseRedirect(reverse('feedmanager:feeds'))

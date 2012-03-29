@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 class Feed(models.Model):
     users = models.ManyToManyField(User)
     url = models.CharField(_('URL'), max_length=128)
+    hash = models.CharField(max_length=32)
     title = models.CharField(_('title'), max_length=70)
     added = models.DateTimeField(_('added'), auto_now_add=True)
     last_checked = models.DateTimeField(_('last checked'), blank=True, null=True)
