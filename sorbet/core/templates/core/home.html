@@ -4,14 +4,13 @@
 
 {% block yield %}
     <div class="container">
-        <div class="row">
-            <div class="span5">
-                <h1>Sorbet</h1>
-                <h2 align="right">A feed manager that sends feed updates directly to your inbox.</h2>
+        <div class="row" id="home-header">
+            <div class="span6">
+                <h2>A feed manager that sends feed updates directly to your inbox.</h2>
                 <p align="center"><a class="btn btn-large btn-success" href="{% url core:register %}">Register Now!</a></p>
             </div>
-            <img class="span7" src="/static/core/img/sorbet.jpg" alt="A delicious bowel of sorbet!" />
-            <div class="span7 offset5" align="right">
+            <img class="span6" src="/static/core/img/sorbet.jpg" alt="A delicious bowel of sorbet!" />
+            <div class="span6 offset6" align="right">
                 <p>Photo by <a href="http://www.flickr.com/photos/cybertoad/">cybertoad</a> on <a href="http://www.flickr.com/photos/cybertoad/6709359885/in/photostream/">Flickr</a>.</p>
             </div>
         </div>
@@ -27,7 +26,7 @@
                     is technically your feed reader now.</p>
             </div>
             <div class="span6">
-                <h3>Why Sorbet?</h3>
+                <h3>Why Sorbet</h3>
                 <p>I've been all over the internets and have consumed enough
                     data. I have a very small selection of feeds I wish to read
                     on a regular basis and those feeds I <em>never</em> want to
@@ -39,9 +38,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="span6 offset6" align="right">
-                <p><a href="{% url core:register %}" class="btn btn-primary">Register New Account</a>
-                    <a href="{% url core:login %}" class="btn btn-primary">Login To Account</a></p>
+            <div class="span12" align="center">
+                <p><a href="{% url core:register %}" class="btn btn-large btn-primary">Register New Account</a>
+                    <a href="{% url core:login %}" class="btn btn-large btn-primary">Login To Account</a></p>
             </div>
         </div>
     </div>

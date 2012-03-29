@@ -5,7 +5,7 @@
 {% block yield %}
     <div class="container">
         <div class="row">
-            <div class="span12">
+            <div class="span12" align="center">
                 <form action="{% url core:login %}" method="POST">{% csrf_token %}
                     {{ form.as_p }}
                     <input type="submit" class="btn btn-primary" name="submit" value="Submit" id="id_submit" />
