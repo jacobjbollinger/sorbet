@@ -13,6 +13,7 @@ from urlparse import urlparse
 
 from .models import Feed
 from .forms import FeedForm
+from .tasks import fetch_feed_items
 
 
 @login_required
@@ -77,7 +78,13 @@ def add_feed(request):
                     messages.warning(request, 'Feed already on the list!')
 
             feed.users.add(request.user)
-            messages.success(request, 'New feed added successfully!')
+
+            # Make sure the feed is up to date and send the user a preview...
+            # To prevent new feeds from sending a blank preview.
+            fetch_feed_items(feed, request.user)
+
+
+            messages.success(request, 'New feed added successfully! Check your inbox for a preview of this feed.')
             return HttpResponseRedirect(reverse('feedmanager:feeds'))
         else:
             messages.error(request, 'Feed could not be added. We currently only support RSS feeds, make sure it is not an ATOM feed.')

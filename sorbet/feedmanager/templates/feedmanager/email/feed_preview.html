@@ -1,0 +1,7 @@
+{% for item in item_list %}
+<h1><a href="{{ item.link }}">{{ item.title }}</a></h1>
+
+{% autoescape off %}{{ item.description }}{% endautoescape %}
+
+{% if not forloop.last %}<hr>{% endif %}
+{% endfor %}
