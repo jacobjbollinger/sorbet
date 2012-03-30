@@ -5,11 +5,61 @@
 {% block yield %}
     <div class="container">
         <div class="row">
-            <div class="span12" align="center">
-                <form action="{% url core:login %}" method="POST">{% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" class="btn btn-primary" name="submit" value="Submit" id="id_submit" />
+            <div class="span6">
+                {% if form.non_field_errors %}
+                    <ul class="unstyled">
+                        {% for error in form.non_field_errors %}
+                            <li class="alert alert-error">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ error|escape }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form action="{% url core:login %}" method="POST" class="form-horizontal">{% csrf_token %}
+                    <fieldset>
+                        <div class="control-group{% if form.username.errors %} error{% endif %}">
+                            <label class="control-label" for="id_username">E-mail</label>
+                            <div class="controls">
+                                {{ form.username }}
+                                {% if form.username.errors %}
+                                <span class="help-inline">
+                                    {% if form.username.errors %}
+                                        {% for error in form.username.errors %}
+                                            {{ error|escape }}
+                                        {% endfor %}
+                                    {% endif %}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="control-group{% if form.password.errors %} error{% endif %}">
+                            <label class="control-label" for="id_password">Password</label>
+                            <div class="controls">
+                                {{ form.password }}
+                                {% if form.password.errors %}
+                                <span class="help-inline">
+                                    {% if form.password.errors %}
+                                        {% for error in form.password.errors %}
+                                            {{ error|escape }}
+                                        {% endfor %}
+                                    {% endif %}
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" name="submit" id="id_submit">Submit</button>
+                            <a href="{% url core:home %}" class="btn">Cancel</a>
+                        </div>
+                    </fieldset>
                 </form>
+            </div>
+            <div class="span6">
+                <h3>Not a user yet?</h3>
+                <p>Head over to our <a href="{% url core:register %}">register page</a>
+                    and sign up. We only ask you for your email address and a
+                    password and promise never to divulge this information.</p>
             </div>
         </div>
     </div>
