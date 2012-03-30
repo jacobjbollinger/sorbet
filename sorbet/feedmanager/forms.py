@@ -10,8 +10,8 @@ class FeedForm(forms.ModelForm):
     def clean_url(self):
         url = self.cleaned_data['url']
         soup = BeautifulSoup(urlopen(url).read())
-        if not soup.rss:
-            raise forms.ValidationError('Only RSS feeds are currently supported.')
+        if not soup.rss and not soup.feed:
+            raise forms.ValidationError('Only RSS and ATOM URLs/feeds are currently supported.')
         return url
 
     class Meta:

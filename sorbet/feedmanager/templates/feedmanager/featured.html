@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    {% if nofeed %}
+    {% if tutorial %}
         <div class="modal fade" id="myModal">
             <div class="modal-header">
                 <a class="close" data-dismiss="modal">×</a>
@@ -68,8 +68,10 @@
     {% endif %}
 {% endblock %}
 
-{% block extra_js %}
-    <script type="text/javascript">
-        $('#myModal').modal('show')
-    </script>
-{% endblock %}
+{% if tutorial %}
+    {% block extra_js %}
+        <script type="text/javascript">
+            $('#myModal').modal('show')
+        </script>
+    {% endblock %}
+{% endif %}
