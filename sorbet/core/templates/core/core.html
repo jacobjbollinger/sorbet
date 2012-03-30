@@ -1,91 +1,100 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{% block title %}{% endblock %}</title>
+{% spaceless %}
+    {% load compress %}
 
-        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pacifico" />
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
 
-        <link rel="stylesheet" type="text/css" href="/static/core/css/lib/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/core/css/lib/bootstrap-responsive.min.css">
-        <link rel="stylesheet" type="text/css" href="/static/core/css/sorbet.css">
-    </head>
+            <title>{% block title %}{% endblock %}</title>
+            <meta name="description" content="">
 
-    <body>
-        <div class="container">
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="container">
-                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
+            <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Pacifico" />
 
-                        <a href="{% url core:home %}" class="brand">Sorbet</a>
-                        <span id="alpha" class="badge badge-error pull-left">alpha</span>
+            {% compress css %}
+                <link rel="stylesheet" type="text/css" href="/static/core/css/lib/bootstrap.min.css">
+                <link rel="stylesheet" type="text/css" href="/static/core/css/lib/bootstrap-responsive.min.css">
+                <link rel="stylesheet" type="text/css" href="/static/core/css/sorbet.css">
+            {% endcompress %}
+        </head>
 
-                        <div class="nav-collapse pull-right">
-                            <ul class="nav">
-                                {% if user.is_authenticated %}
-                                    <li><a href="{% url feedmanager:featured %}">Featured</a></li>
-                                    <li><a href="{% url feedmanager:feeds %}">Feeds</a></li>
-                                    <li><a href="{% url core:logout %}">Logout</a></li>
-                                {% else %}
-                                    <li><a href="{% url core:register %}">Register</a></li>
-                                    <li><a href="{% url core:login %}">Login</a></li>
-                                {% endif %}
-                            </ul>
+        <body>
+            <div class="container">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </a>
+
+                            <a href="{% url core:home %}" class="brand">Sorbet</a>
+                            <span id="alpha" class="badge badge-error pull-left">alpha</span>
+
+                            <div class="nav-collapse pull-right">
+                                <ul class="nav">
+                                    {% if user.is_authenticated %}
+                                        <li><a href="{% url feedmanager:featured %}">Featured</a></li>
+                                        <li><a href="{% url feedmanager:feeds %}">Feeds</a></li>
+                                        <li><a href="{% url core:logout %}">Logout</a></li>
+                                    {% else %}
+                                        <li><a href="{% url core:register %}">Register</a></li>
+                                        <li><a href="{% url core:login %}">Login</a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        {% if messages %}
-        <div class="container">
-            <div class="row">
-                <div class="span12">
-                    <ul class="unstyled">
-                        {% for message in messages %}
-                            <li class="alert alert-{{ message.tags }}">
-                                <a class="close" data-dismiss="alert">×</a>
-                                {{ message }}
-                            </li>
-                        {% endfor %}
-                    </ul>
+            {% if messages %}
+            <div class="container">
+                <div class="row">
+                    <div class="span12">
+                        <ul class="unstyled">
+                            {% for message in messages %}
+                                <li class="alert alert-{{ message.tags }}">
+                                    <a class="close" data-dismiss="alert">×</a>
+                                    {{ message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endif %}
+            {% endif %}
 
-        {% block yield %}{% endblock %}
+            {% block yield %}{% endblock %}
 
-        <div id="footer" class="container">
-            <div class="row">
-                <div class="span12">
-                    <hr />
+            <div id="footer" class="container">
+                <div class="row">
+                    <div class="span12">
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span6">
+                        <p>Content &copy; {% now "Y" %}
+                            the Sorbet project
+                            under the
+                            <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.</p>
+                        <p>Feeds copyright under their respective owners. Sorbet and
+                            it's contributors are not responsible for anything that
+                            appears in any of the feeds and posts being sent by our
+                            service.</p>
+                    </div>
+                    <div class="span6" align="right">
+                        <p>You can find all of the code for Sorbet on <a href="https://github.com/overshard/sorbet/">GitHub</a>.</p>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="span6">
-                    <p>Content &copy; {% now "Y" %}
-                        the Sorbet project
-                        under the
-                        <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>.</p>
-                    <p>Feeds copyright under their respective owners. Sorbet and
-                        it's contributors are not responsible for anything that
-                        appears in any of the feeds and posts being sent by our
-                        service.</p>
-                </div>
-                <div class="span6" align="right">
-                    <p>You can find all of the code for Sorbet on <a href="https://github.com/overshard/sorbet/">GitHub</a>.</p>
-                </div>
-            </div>
-        </div>
 
-        <script type="text/javascript" src="/static/core/js/lib/jquery.min.js"></script>
-        <script type="text/javascript" src="/static/core/js/lib/bootstrap.min.js"></script>
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+            <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js"></script>
 
-        {% block extra_js %}{% endblock %}
-    </body>
-</html>
+            {% block extra_js %}{% endblock %}
+        </body>
+    </html>
+{% endspaceless %}
