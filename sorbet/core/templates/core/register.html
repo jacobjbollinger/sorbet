@@ -1,4 +1,6 @@
 {% extends "core/core.html" %}
+{% load bootstrap_field %}
+
 
 {% block title %}Sorbet - New User{% endblock %}
 
@@ -6,10 +8,26 @@
     <div class="container">
         <div class="row">
             <div class="span6">
-                <p>Please fill out the following information:</p>
-                <form action="{% url core:register %}" method="POST">{% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" class="btn btn-primary" name="submit" value="Submit" id="id_submit" />
+                {% if form.non_field_errors %}
+                    <ul class="unstyled">
+                        {% for error in form.non_field_errors %}
+                            <li class="alert alert-error">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ error|escape }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form action="{% url core:register %}" method="POST" class="form-horizontal">{% csrf_token %}
+                    <fieldset>
+                        {% bootstrap_field form.email %}
+                        {% bootstrap_field form.password1 %}
+                        {% bootstrap_field form.password2 %}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary" name="submit" id="id_submit">Submit</button>
+                            <a href="{% url core:home %}" class="btn">Cancel</a>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
             <div class="span6">

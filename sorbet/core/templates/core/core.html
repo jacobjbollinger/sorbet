@@ -24,8 +24,8 @@
                         <a href="{% url core:home %}" class="brand">Sorbet</a>
                         <span id="alpha" class="badge badge-error pull-left">alpha</span>
 
-                        <div class="nav-collapse">
-                            <ul class="nav pull-right">
+                        <div class="nav-collapse pull-right">
+                            <ul class="nav">
                                 {% if user.is_authenticated %}
                                     <li><a href="{% url feedmanager:featured %}">Featured</a></li>
                                     <li><a href="{% url feedmanager:feeds %}">Feeds</a></li>

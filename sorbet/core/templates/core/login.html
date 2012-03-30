@@ -1,4 +1,6 @@
 {% extends "core/core.html" %}
+{% load bootstrap_field %}
+
 
 {% block title %}Sorbet - Login{% endblock %}
 
@@ -18,36 +20,8 @@
                 {% endif %}
                 <form action="{% url core:login %}" method="POST" class="form-horizontal">{% csrf_token %}
                     <fieldset>
-                        <div class="control-group{% if form.username.errors %} error{% endif %}">
-                            <label class="control-label" for="id_username">E-mail</label>
-                            <div class="controls">
-                                {{ form.username }}
-                                {% if form.username.errors %}
-                                <span class="help-inline">
-                                    {% if form.username.errors %}
-                                        {% for error in form.username.errors %}
-                                            {{ error|escape }}
-                                        {% endfor %}
-                                    {% endif %}
-                                </span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="control-group{% if form.password.errors %} error{% endif %}">
-                            <label class="control-label" for="id_password">Password</label>
-                            <div class="controls">
-                                {{ form.password }}
-                                {% if form.password.errors %}
-                                <span class="help-inline">
-                                    {% if form.password.errors %}
-                                        {% for error in form.password.errors %}
-                                            {{ error|escape }}
-                                        {% endfor %}
-                                    {% endif %}
-                                </span>
-                                {% endif %}
-                            </div>
-                        </div>
+                        {% bootstrap_field form.username %}
+                        {% bootstrap_field form.password %}
                         <div class="form-actions">
                             <button type="submit" class="btn btn-primary" name="submit" id="id_submit">Submit</button>
                             <a href="{% url core:home %}" class="btn">Cancel</a>
