@@ -15,7 +15,6 @@ from .forms import FeedForm
 from .tasks import fetch_feed_items
 
 
-@login_required
 def featured(request):
     template = u'feedmanager/featured.html'
     context = {

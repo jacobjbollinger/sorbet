@@ -7,3 +7,4 @@ psycopg2==2.4.4
 gunicorn==0.13.4
 django-cronjobs==0.2.3
 django_compressor==1.1.2
+django-debug-toolbar==0.9.4
