@@ -1,11 +1,24 @@
+# django
 Django==1.4
+
+# database
 South==0.7.4
-beautifulsoup4==4.0.2
-django-celery==2.5.1
-feedparser==5.1.1
 psycopg2==2.4.4
+
+# parsing
+beautifulsoup4==4.0.2
+feedparser==5.1.1
+
+# tasks
+django-celery==2.5.1
+
+# compression
+django_compressor==1.1.2
+
+# server
 gunicorn==0.13.4
 django-cronjobs==0.2.3
-django_compressor==1.1.2
-django-debug-toolbar==0.9.4
 python-memcached==1.48
+
+# testing
+django-debug-toolbar==0.9.4
