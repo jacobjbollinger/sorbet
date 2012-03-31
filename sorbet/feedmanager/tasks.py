@@ -33,7 +33,15 @@ def fetch_feed_items(feed, user=None):
 
     if user: send_preview(user, feed)
 
-    feed.last_updated = datetime(*(parsed_feed.updated_parsed[0:6]), tzinfo=utc)
+    try:
+        feed.last_updated = datetime(*(parsed_feed.updated_parsed[0:6]), tzinfo=utc)
+    except AttributeError:
+        try:
+            # as the last resort check the Last-Modified header
+            feed.last_updated = datetime(*(parsed_feed.modified[0:6]), tzinfo=utc)
+        except AttributeError:
+            # ghetto feed without updated/published date for the entire feed
+            feed.last_updated = None
     feed.last_checked = tz_utcnow()
     feed.save()
 
