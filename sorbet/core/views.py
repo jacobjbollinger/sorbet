@@ -39,7 +39,8 @@ def register(request):
     else:
         key = request.GET.get('key', None)
         if settings.INVITE_ONLY and not Invitation.objects.filter(key=key).exists():
-                return HttpResponseRedirect(reverse('core:home'))
+            messages.error(request, "Sorry, invitation is required at this time. Try again later.")
+            return HttpResponseRedirect(reverse('core:home'))
         request.session["invitation_key"] = key
         form = EmailUserCreationForm()
 
