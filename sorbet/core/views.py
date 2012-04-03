@@ -1,11 +1,14 @@
 from django.template.response import TemplateResponse
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.conf import settings
 
 from .forms import EmailUserCreationForm
+from .models import Invitation
 
 
 def home(request):
@@ -19,6 +22,9 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
+        key = request.session.get("invitation_key", None)
+        if settings.INVITE_ONLY and not Invitation.objects.filter(key=key).exists():
+            return HttpResponse403
         form = EmailUserCreationForm(request.POST)
         if form.is_valid():
             from django.contrib.auth import login
@@ -27,8 +33,14 @@ def register(request):
             user.backend = "sorbet.core.backends.EmailAuthBackend"
             login(request, user)
             messages.success(request, 'New user created! Thank you for trying out Sorbet.')
+            if key:
+                Invitation.objects.filter(key=key).delete()
             return HttpResponseRedirect(reverse('feedmanager:feeds'))
     else:
+        key = request.GET.get('key', None)
+        if settings.INVITE_ONLY and not Invitation.objects.filter(key=key).exists():
+                return HttpResponseRedirect(reverse('core:home'))
+        request.session["invitation_key"] = key
         form = EmailUserCreationForm()
 
     template = u'core/register.html'

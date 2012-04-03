@@ -92,3 +92,5 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = ['sorbet.core.backends.EmailAuthBackend']
+
+INVITE_ONLY = True
