@@ -32,7 +32,7 @@ class Item(models.Model):
     title = models.CharField(_('title'), max_length=70)
     link = models.TextField(_('link'))
     description = models.TextField(_('description'))
-    guid = models.CharField(_('GUID'), max_length=128)
+    guid = models.TextField(_('GUID'))
 
     def __unicode__(self):
         return self.title
