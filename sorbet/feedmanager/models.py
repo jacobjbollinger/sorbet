@@ -30,7 +30,7 @@ class Item(models.Model):
     added = models.DateTimeField(_('added'), auto_now_add=True)
     pubdate = models.DateTimeField(_('published'))
     title = models.CharField(_('title'), max_length=70)
-    link = models.CharField(_('link'), max_length=128)
+    link = models.TextField(_('link'))
     description = models.TextField(_('description'))
     guid = models.CharField(_('GUID'), max_length=128)
 
