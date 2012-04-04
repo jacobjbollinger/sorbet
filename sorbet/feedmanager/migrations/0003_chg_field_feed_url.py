@@ -8,13 +8,13 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Changing field 'Feed.url'
+        db.alter_column('feedmanager_feed', 'url', self.gf('django.db.models.fields.TextField')())
 
-        # Changing field 'Item.guid'
-        db.alter_column('feedmanager_item', 'guid', self.gf('django.db.models.fields.TextField')())
     def backwards(self, orm):
+        # Changing field 'Feed.url'
+        db.alter_column('feedmanager_feed', 'url', self.gf('django.db.models.fields.CharField')(max_length=128))
 
-        # Changing field 'Item.guid'
-        db.alter_column('feedmanager_item', 'guid', self.gf('django.db.models.fields.CharField')(max_length=128))
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -68,9 +68,9 @@ class Migration(SchemaMigration):
             'added': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['feedmanager.Feed']"}),
-            'guid': ('django.db.models.fields.TextField', [], {}),
+            'guid': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'link': ('django.db.models.fields.TextField', [], {}),
+            'link': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
             'pubdate': ('django.db.models.fields.DateTimeField', [], {}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '70'})
         }

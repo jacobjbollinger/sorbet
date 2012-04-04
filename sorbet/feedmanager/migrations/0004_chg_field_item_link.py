@@ -8,13 +8,13 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-
         # Changing field 'Item.link'
         db.alter_column('feedmanager_item', 'link', self.gf('django.db.models.fields.TextField')())
-    def backwards(self, orm):
 
+    def backwards(self, orm):
         # Changing field 'Item.link'
         db.alter_column('feedmanager_item', 'link', self.gf('django.db.models.fields.CharField')(max_length=128))
+        
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
