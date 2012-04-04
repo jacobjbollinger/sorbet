@@ -69,7 +69,7 @@ def send_preview(user, feed):
     to = user.email
 
     html_content = render_to_string('feedmanager/email/feed_preview.html',
-        { 'item_list': feed.item_set.all()[:3] })
+        { 'item_list': feed.item_set.order_by('-pubdate')[:3] })
     text_content = strip_tags(html_content)
 
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
