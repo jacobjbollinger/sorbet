@@ -2,6 +2,10 @@
 /Include/
 /Lib/
 /Scripts/
+/bin/
+/include/
+/lib/
+/local
 
 # python
 *.pyc
