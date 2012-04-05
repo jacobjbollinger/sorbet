@@ -37,3 +37,8 @@ body {
 #alpha {
     margin-top: 11px;
 }
+
+#alpha:hover {
+    cursor: default;
+    background-color: #B94A48;
+}
