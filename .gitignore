@@ -6,6 +6,7 @@
 /include/
 /lib/
 /local
+/share/
 
 # python
 *.pyc
