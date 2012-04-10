@@ -36,10 +36,10 @@
                 </div>
                 <div class="row">
                     <div class="span4">
-                        <h3>Team Liquid News</h3>
-                        <p>Featured news from Team Liquid, a StarCraft gaming community.</p>
+                        <h3>Sorbet Commits</h3>
+                        <p>Get instant notifications of commits to the Sorbet GitHub repository.</p>
                         <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
-                            <input id="id_url" type="hidden" name="url" value="http://www.teamliquid.net/rss/news.xml">
+                            <input id="id_url" type="hidden" name="url" value="https://github.com/overshard/sorbet/commits/master.atom">
                             <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
                         </form>
                     </div>

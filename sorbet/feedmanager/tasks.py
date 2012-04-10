@@ -18,9 +18,12 @@ def fetch_feed_items(feed, user=None):
         try:
             Item.objects.get(feed=feed, guid=item.guid)
         except Item.DoesNotExist:
+            try: date = datetime(*(item.published_parsed[0:6]), tzinfo=utc)
+            except AttributeError: date = datetime(*(item.updated_parsed[0:6]), tzinfo=utc)
+
             new_item = Item(
                 feed = feed,
-                pubdate = datetime(*(item.published_parsed[0:6]), tzinfo=utc),
+                pubdate = date,
                 title = item.title,
                 link = item.link,
                 description = item.summary,
