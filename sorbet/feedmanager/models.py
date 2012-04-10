@@ -29,7 +29,7 @@ class Item(models.Model):
     feed = models.ForeignKey(Feed)
     added = models.DateTimeField(_('added'), auto_now_add=True)
     pubdate = models.DateTimeField(_('published'))
-    title = models.CharField(_('title'), max_length=70)
+    title = models.TextField(_('title'))
     link = models.TextField(_('link'))
     description = models.TextField(_('description'))
     guid = models.TextField(_('GUID'))
