@@ -1,0 +1,42 @@
+<table width="100%" cellspacing="0" style="">
+    <thead style="background-color: #0B1926; color: white; font-family: Helvetica, Verdana, Sans-Serif">
+        <th align="left" width="50%">
+            <h1 style="margin: 0; padding: 10px 20px">
+                <a href="https://sorbetapp.com/" style="text-decoration: none; color: white">
+                    Sorbet
+                </a>
+            </h1>
+        </th>
+        <th width="50%" align="right">
+            <h2 style="margin: 0; padding: 10px 20px">
+                {% block title %}{% endblock %}
+            </h2>
+        </th>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td colspan="2" style="padding: 30px 0">
+                {% block yield %}{% endblock %}
+            </td>
+        </tr>
+    </tbody>
+
+    <tfoot style="font-family: Helvetica, Verdana, Sans-Serif; color: #777; font-size: 12px">
+        <tr>
+            <th colspan="2">
+                <hr style="border: none; border-top: 1px solid #ccc">
+            </th>
+        </tr>
+        <tr>
+            <th align="left" valign="top" style="font-weight: normal">
+                {% block footer %}{% endblock %}
+            </th>
+            <th align="right" valign="top" style="font-weight: normal">
+                Content copyright each feeds repective owners. Sorbet claims no
+                copyright over anything that appears in any feeds and is not
+                liable for any information that may be illegal or offensive.
+            </th>
+        </tr>
+    </tfood>
+</table>

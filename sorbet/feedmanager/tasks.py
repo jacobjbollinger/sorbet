@@ -29,7 +29,7 @@ def fetch_feed_items(feed, user=None):
             new_item.save()
 
             if feed.last_checked != None:
-                send_new_item(feed.users.all(), new_item, feed.title)
+                send_new_item(feed.users.all(), new_item)
 
     if user: send_preview(user, feed)
 
@@ -47,9 +47,9 @@ def fetch_feed_items(feed, user=None):
 
 
 @task
-def send_new_item(users, item, feed_title):
+def send_new_item(users, item):
     for user in users:
-        subject = ''.join(['[', feed_title, '] ', item.title])
+        subject = ''.join(['[', item.feed.title, '] ', item.title])
         from_email = 'Sorbet <noreply@sorbetapp.com>'
         to = user.email
 
@@ -68,8 +68,8 @@ def send_preview(user, feed):
     from_email = 'Sorbet <noreply@sorbetapp.com>'
     to = user.email
 
-    html_content = render_to_string('feedmanager/email/feed_preview.html',
-        { 'item_list': feed.item_set.order_by('-pubdate')[:3] })
+    html_content = render_to_string('feedmanager/email/new_item.html',
+        { 'item': feed.item_set.order_by('-pubdate')[:1].get() })
     text_content = strip_tags(html_content)
 
     msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

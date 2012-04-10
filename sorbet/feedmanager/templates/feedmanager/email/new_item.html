@@ -1,1 +1,20 @@
-{% autoescape off %}{{ item.description }}{% endautoescape %}
+{% extends "feedmanager/email/email.html" %}
+
+
+{% block title %}
+    <a href="{{ item.link }}" style="text-decoration: none; color: white">
+        {{ item.title}}
+    </a>
+{% endblock %}
+
+
+{% block yield %}
+    {% autoescape off %}
+        {{ item.description }}
+    {% endautoescape %}
+{% endblock %}
+
+
+{% block footer %}
+    To unsubscribe from this feed <a href="https://sorbetapp.com{% url feedmanager:remove-feed item.feed.id %}">Click Here</a>.
+{% endblock %}
