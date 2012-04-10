@@ -46,7 +46,8 @@ MIDDLEWARE_CLASSES = (
 SECRET_KEY = 'v3qameh$9l3-oor&amp;fjtrpc=2uxf3t1u0$xl4b2k_1(=hz0k_wc'
 ROOT_URLCONF = 'sorbet.urls'
 WSGI_APPLICATION = 'sorbet.wsgi.application'
-ADMINS = [('Isaac Bythewood', 'isaac@bythewood.me')]
+ADMINS = [('Isaac Bythewood', 'isaac@bythewood.me'),
+          ('Krzysztof Klimonda', 'kklimonda@syntaxhighlighted.com')]
 MANAGERS = ADMINS
 LOGIN_REDIRECT_URL = '/feeds/'
 CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
