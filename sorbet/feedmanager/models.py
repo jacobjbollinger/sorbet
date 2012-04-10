@@ -10,7 +10,7 @@ class Feed(models.Model):
     users = models.ManyToManyField(User)
     url = models.TextField(_('URL'))
     hash = models.CharField(max_length=32)
-    title = models.CharField(_('title'), max_length=70)
+    title = models.TextField(_('title'))
     added = models.DateTimeField(_('added'), auto_now_add=True)
     last_checked = models.DateTimeField(_('last checked'), blank=True, null=True)
     last_updated = models.DateTimeField(_('last updated'), blank=True, null=True)
