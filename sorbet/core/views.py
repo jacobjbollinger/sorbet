@@ -25,7 +25,10 @@ def register(request):
         key = request.session.get("invitation_key", None)
         if settings.INVITE_ONLY and not Invitation.objects.filter(key=key).exists():
             return HttpResponse403
-        form = EmailUserCreationForm(request.POST)
+        post_data = request.POST.copy()
+        if request.session["invitation_email"]:
+            post_data['email'] = request.session["invitation_email"]
+        form = EmailUserCreationForm(post_data)
         if form.is_valid():
             from django.contrib.auth import login
             user = form.save()
@@ -38,12 +41,21 @@ def register(request):
             return HttpResponseRedirect(reverse('feedmanager:feeds'))
     else:
         key = request.GET.get('key', None)
-        if settings.INVITE_ONLY and not Invitation.objects.filter(key=key).exists():
-            messages.error(request, "Sorry, invitation is required at this time. Try again later.")
-            return HttpResponseRedirect(reverse('core:home'))
-        request.session["invitation_key"] = key
-        form = EmailUserCreationForm()
-
+        if settings.INVITE_ONLY:
+            try:
+                invitation = Invitation.objects.filter(key=key).get()
+            except Invitation.DoesNotExist:
+                messages.error(request, "Sorry, invitation is required at this time. Try again later.")
+                return HttpResponseRedirect(reverse('core:home'))
+            else:
+                request.session["invitation_key"] = invitation.key
+                request.session["invitation_email"] = invitation.email
+        else:
+            request.session["invitation_email"] = None
+        form = EmailUserCreationForm(initial={'email': request.session["invitation_email"]})
+        if request.session["invitation_email"]:
+            # disable email field when email was set from the invitation
+            form.fields['email'].widget.attrs['readonly'] = True
     template = u'core/register.html'
     context = {
         'form': form,
