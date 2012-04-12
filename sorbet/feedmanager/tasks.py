@@ -1,3 +1,9 @@
+# feedparser has a list of uri schemes it allows. magnet is not on that list,
+# so magnet links get stripped from feeds. To avoid hacking feedparser module
+# we instead change it here. http://code.google.com/p/feedparser/issues/detail?id=343
+import feedparser
+feedparser.ACCEPTABLE_URI_SCHEMES = feedparser.ACCEPTABLE_URI_SCHEMES + ('magnet',)
+
 from django.utils.timezone import now as tz_utcnow
 from django.utils.timezone import utc
 from django.core.mail import EmailMultiAlternatives
@@ -5,7 +11,6 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
 from celery.task import task
-from feedparser import parse
 from datetime import datetime
 
 from .models import Item
@@ -13,7 +18,7 @@ from .models import Item
 
 @task
 def fetch_feed_items(feed, user=None):
-    parsed_feed = parse(feed.url)
+    parsed_feed = feedparser.parse(feed.url)
     for item in parsed_feed.entries:
         try:
             Item.objects.get(feed=feed, guid=item.guid)
