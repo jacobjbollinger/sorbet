@@ -4,6 +4,8 @@
 import feedparser
 feedparser.ACCEPTABLE_URI_SCHEMES = feedparser.ACCEPTABLE_URI_SCHEMES + ('magnet',)
 
+import logging
+
 from django.utils.timezone import now as tz_utcnow
 from django.utils.timezone import utc
 from django.core.mail import EmailMultiAlternatives
@@ -38,6 +40,10 @@ def fetch_feed_items(feed, user=None):
 
             if feed.last_checked != None:
                 send_new_item(feed.users.all(), new_item)
+
+    if not 'magnet' in feedparser.ACCEPTABLE_URI_SCHEMES:
+        logger = logging.getLogger('feedmanager.tasks')
+        logger.error('magnet links not supported by the installed feedparser module')
 
     if user: send_preview(user, feed)
 
