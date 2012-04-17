@@ -41,12 +41,9 @@ def fetch_feed_items(feed, user=None):
             if feed.last_checked != None:
                 send_new_item(feed.users.all(), new_item)
 
-    logger = logging.getLogger('feedmanager.tasks')
     if not 'magnet' in feedparser.ACCEPTABLE_URI_SCHEMES:
         logger = logging.getLogger('feedmanager.tasks')
         logger.error('magnet links not supported by the installed feedparser module')
-    else:
-        logger.error('magnet links SUPPORTED by the installed feedparser module')
 
     if user: send_preview(user, feed)
 
