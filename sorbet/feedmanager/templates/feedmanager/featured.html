@@ -7,24 +7,19 @@
         <div class="row">
             <div class="span4">
                 <h1>Featured Feeds</h1>
-                <p>Some classics feeds to get you started and some new ones to
-                    checkout. There may also be a few custom items tossed into
-                    this list of websites that don't normally provide feeds.</p>
-                <h3>Don't see something you love?</h3>
-                <p>Suggest a feed! We are always looking for new awesome things
-                    to read or listen and will gladly take a look at your
-                    suggestions.</p>
+                <p>Some classic and new feeds to get you started and hooked on
+                    Sorbet!</p>
             </div>
             <div class="span8">
+                <h3>Don't see something you love?</h3>
+                <p>Suggest a feed! We are always looking for new awesome things
+                    to read or listen to and will gladly take a look at your
+                    suggestions. Post a request on our
+                    <a href="https://github.com/overshard/sorbet/issues">
+                    GitHub Issues</a> page.</p>
+            </div>
+            <div class="span12">
                 <div class="row">
-                    <div class="span4">
-                        <h3>XKCD</h3>
-                        <p>A webcomic of romance and math humor.</p>
-                        <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
-                            <input id="id_url" type="hidden" name="url" value="http://xkcd.com/rss.xml">
-                            <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
-                        </form>
-                    </div>
                     <div class="span4">
                         <h3>You Look Nice Today</h3>
                         <p>You Look Nice Today is an audio-based Journal of Emotional Hygiene, staffed by lonelysandwich, scottsimpson, and hotdogsladies.</p>
@@ -33,13 +28,19 @@
                             <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
                         </form>
                     </div>
-                </div>
-                <div class="row">
                     <div class="span4">
-                        <h3>Sorbet Commits</h3>
-                        <p>Get instant notifications of commits to the Sorbet GitHub repository.</p>
+                        <h3>XKCD</h3>
+                        <p>A webcomic of romance and math humor. XKCD updates every Monday, Wednesday, and Friday.</p>
                         <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
-                            <input id="id_url" type="hidden" name="url" value="https://github.com/overshard/sorbet/commits/master.atom">
+                            <input id="id_url" type="hidden" name="url" value="http://xkcd.com/rss.xml">
+                            <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
+                        </form>
+                    </div>
+                    <div class="span4">
+                        <h3>Roderick on the Line</h3>
+                        <p>Roderick on the Line is a frank and candid weekly phone call between John Roderick and Merlin Mann.</p>
+                        <form action="{% url feedmanager:add-feed %}" method="POST">{% csrf_token %}
+                            <input id="id_url" type="hidden" name="url" value="http://feeds.feedburner.com/RoderickOnTheLine">
                             <button type="submit" name="submit" id="id_submit" class="btn btn-primary"><i class="icon-plus-sign icon-white"></i> Add to Feeds</button>
                         </form>
                     </div>
