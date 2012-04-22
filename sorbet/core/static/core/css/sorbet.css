@@ -18,6 +18,12 @@ p {
     border-top: none;
 }
 
+.table th, .table td {
+    font-size: 16px;
+    line-height: 22px;
+    padding: 10px;
+}
+
 .form-actions button {
     margin-right: 10px;
 }
