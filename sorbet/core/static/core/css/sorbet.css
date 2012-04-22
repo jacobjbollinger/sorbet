@@ -24,6 +24,10 @@ p {
     padding: 10px;
 }
 
+.table th:last-child, .table td:last-child {
+    text-align: center;
+}
+
 .form-actions button {
     margin-right: 10px;
 }
@@ -54,17 +58,15 @@ p {
 .navbar .nav > li > a {
     padding: 7px 15px;
     border-radius: 25px;
-    margin: 25px 15px;
+    margin: 25px 10px;
     font-size: 22px;
     color: #333;
     text-shadow: none;
-    border: 2px solid #777;
+    border: 2px solid #aaa;
 }
 
 .navbar .nav > li > a:hover {
-    background-color: #333;
-    color: #ccc;
-    border-color: #ccc
+    background-color: #aaa;
 }
 
 .navbar .nav > li:last-child > a {
