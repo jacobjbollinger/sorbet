@@ -1,3 +1,6 @@
+/* -------------------------------------------------------------------------- */
+/* Global Tags */
+
 body {
     background: url("/static/core/img/background.png");
     padding: 40px 0;
@@ -7,6 +10,12 @@ p {
     font-size: 16px;
     line-height: 22px;
 }
+
+/* -------------------------------------------------------------------------- */
+
+
+/* -------------------------------------------------------------------------- */
+/* Global Classes */
 
 .row {
     padding: 20px 0;
@@ -18,27 +27,15 @@ p {
     border-top: none;
 }
 
-.table th, .table td {
-    font-size: 16px;
-    line-height: 22px;
-    padding: 10px;
-}
-
-.table th:last-child, .table td:last-child {
-    text-align: center;
-}
-
 .form-actions button {
     margin-right: 10px;
 }
 
-.add-feed form {
-    padding-top: 41px;
-}
+/* -------------------------------------------------------------------------- */
 
-.feed-table {
-    padding-top: 0;
-}
+
+/* -------------------------------------------------------------------------- */
+/* Navbar */
 
 .navbar-inner {
     background: none;
@@ -73,16 +70,11 @@ p {
     margin-right: 0;
 }
 
-#home-header h1 {
-    margin-bottom: 15px;
-    font-size: 4em;
-    font-weight: normal;
-    font-family: "Pacifico";
-}
+/* -------------------------------------------------------------------------- */
 
-#home-header h2 {
-    margin-bottom: 15px;
-}
+
+/* -------------------------------------------------------------------------- */
+/* Footer */
 
 hr {
     border-color: #999;
@@ -97,3 +89,5 @@ hr {
 #footer p:hover {
     opacity: 1;
 }
+
+/* -------------------------------------------------------------------------- */

@@ -1,0 +1,15 @@
+/* -------------------------------------------------------------------------- */
+/* Home Page */
+
+#home-header h1 {
+    margin-bottom: 15px;
+    font-size: 4em;
+    font-weight: normal;
+    font-family: "Pacifico";
+}
+
+#home-header h2 {
+    margin-bottom: 15px;
+}
+
+/* -------------------------------------------------------------------------- */

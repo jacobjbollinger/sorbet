@@ -1,0 +1,22 @@
+/* -------------------------------------------------------------------------- */
+/* Feeds Page */
+
+.add-feed form {
+    padding-top: 41px;
+}
+
+.feed-table {
+    padding-top: 0;
+}
+
+.table th, .table td {
+    font-size: 16px;
+    line-height: 22px;
+    padding: 10px;
+}
+
+.table th:last-child, .table td:last-child {
+    text-align: center;
+}
+
+/* -------------------------------------------------------------------------- */
