@@ -45,7 +45,7 @@ def register(request):
             try:
                 invitation = Invitation.objects.filter(key=key).get()
             except Invitation.DoesNotExist:
-                messages.error(request, "Sorry, invitation is required at this time. Try again later.")
+                messages.error(request, "Sorry, invitation is required at this time for our hosted version. <a href=\"https://github.com/overshard/sorbet/\">Clone us on GitHub</a> instead and host Sorbet yourself!")
                 return HttpResponseRedirect(reverse('core:home'))
             else:
                 request.session["invitation_key"] = invitation.key
