@@ -33,13 +33,11 @@ TEMPLATE_LOADERS = (
 
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 
@@ -50,7 +48,6 @@ ADMINS = [('Isaac Bythewood', 'isaac@bythewood.me'),
           ('Krzysztof Klimonda', 'kklimonda@syntaxhighlighted.com')]
 MANAGERS = ADMINS
 LOGIN_REDIRECT_URL = '/feeds/'
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 LOGGING = {
     'version': 1,
