@@ -92,3 +92,4 @@ INSTALLED_APPS = (
 AUTHENTICATION_BACKENDS = ['sorbet.core.backends.EmailAuthBackend']
 
 INVITE_ONLY = True
+INVITES_PER_WEEK = 50

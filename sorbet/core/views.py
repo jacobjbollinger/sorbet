@@ -3,11 +3,13 @@ from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.conf import settings
 
-from .forms import EmailUserCreationForm
+from .forms import (EmailUserCreationForm,
+                    InvitationForm)
 from .models import Invitation
 
 
@@ -45,8 +47,10 @@ def register(request):
             try:
                 invitation = Invitation.objects.filter(key=key).get()
             except Invitation.DoesNotExist:
-                messages.error(request, "Sorry, invitation is required at this time for our hosted version. <a href=\"https://github.com/overshard/sorbet/\">Clone us on GitHub</a> instead and host Sorbet yourself!")
-                return HttpResponseRedirect(reverse('core:home'))
+                messages.error(request, "Sorry, invitation is required at this time for our hosted version. "
+                               "<a href=\"https://github.com/overshard/sorbet/\">Clone us on GitHub</a> "
+                               "instead and host Sorbet yourself!")
+                return HttpResponseRedirect(reverse('core:invite'))
             else:
                 request.session["invitation_key"] = invitation.key
                 request.session["invitation_email"] = invitation.email
@@ -62,6 +66,18 @@ def register(request):
     }
     return TemplateResponse(request, template, context)
 
+def invite(request):
+    form = InvitationForm(request.POST or None)
+    if form.is_valid():
+        invitation = form.save()
+        if Invitation.objects.limit_reached():
+            messages.warning(request, "Invitation limit for this week has been reached. Your invitation will be sent as soon as possible.")
+        else:
+            messages.success(request, "Your invitation has been sent for the given email address. It should arrive shortly.")
+            send_mail('Sorbet invitation', 'http://sorbetapp.com/register/?key=%s' % (invitation.key,), 'noreply@sorbetapp.com',
+                       [invitation.email], fail_silently=False)
+            return HttpResponseRedirect(reverse('core:home'))
+    return TemplateResponse(request, u'core/invite.html', {'form': form})
 
 @login_required
 def logout_user(request):

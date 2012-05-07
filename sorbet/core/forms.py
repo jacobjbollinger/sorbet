@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
+from .models import Invitation
 
 _ = lambda x: x
 
@@ -65,3 +66,9 @@ class EmailUserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class InvitationForm(forms.ModelForm):
+    class Meta:
+        model = Invitation
+        fields = ['email']
