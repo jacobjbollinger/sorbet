@@ -7,7 +7,7 @@ psycopg2==2.4.4
 
 # parsing
 beautifulsoup4==4.0.2
-feedparser==5.1.1
+feedparser==5.1.2
 
 # tasks
 django-celery==2.5.1

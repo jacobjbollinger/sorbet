@@ -1,8 +1,4 @@
-# feedparser has a list of uri schemes it allows. magnet is not on that list,
-# so magnet links get stripped from feeds. To avoid hacking feedparser module
-# we instead change it here. http://code.google.com/p/feedparser/issues/detail?id=343
 import feedparser
-feedparser.ACCEPTABLE_URI_SCHEMES = feedparser.ACCEPTABLE_URI_SCHEMES + ('magnet',)
 
 from django.utils.timezone import now as tz_utcnow
 from django.utils.timezone import utc
