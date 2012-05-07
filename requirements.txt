@@ -10,7 +10,7 @@ beautifulsoup4==4.0.2
 feedparser==5.1.2
 
 # tasks
-django-celery==2.5.1
+django-celery==2.5.5
 
 # compression
 django_compressor==1.1.2

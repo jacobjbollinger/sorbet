@@ -1,11 +1,11 @@
-from os.path import dirname, realpath, join
+import sys
+from os.path import dirname, realpath, join, normpath
+from celery.schedules import crontab
 import djcelery
-
-
 djcelery.setup_loader()
 
-
 SITE_ROOT = join(dirname(realpath(__file__)), '../../')
+sys.path.insert(0, normpath(join(SITE_ROOT, "sorbet/")))
 
 
 TIME_ZONE = 'America/New_York'
@@ -84,12 +84,25 @@ INSTALLED_APPS = (
     'compressor',
     'south',
     'djcelery',
-    'cronjobs',
-    'sorbet.core',
-    'sorbet.feedmanager',
+    'core',
+    'feedmanager',
 )
 
 AUTHENTICATION_BACKENDS = ['sorbet.core.backends.EmailAuthBackend']
+AUTH_PROFILE_MODULE = 'core.UserProfile'
 
 INVITE_ONLY = True
 INVITES_PER_WEEK = 50
+from datetime import timedelta
+
+CELERYBEAT_SCHEDULE = {
+    "send-invitations": {
+        "task": "core.tasks.send_invitations",
+        "schedule": crontab(hour=0, minute=0, day_of_week="monday"),
+        "args": (INVITES_PER_WEEK,),
+    },
+    "update-feeds": {
+        "task": "feedmanager.tasks.send_updates",
+        "schedule": timedelta(hours=3),
+    }
+}

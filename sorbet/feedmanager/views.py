@@ -12,8 +12,7 @@ from urlparse import urlparse
 
 from .models import Feed
 from .forms import FeedForm
-from .tasks import fetch_feed_items
-
+import feedmanager.tasks as feed_tasks
 
 def featured(request):
     template = u'feedmanager/featured.html'
@@ -44,6 +43,7 @@ def add_feed(request):
         if form.is_valid():
             url = urlparse(form.clean_url())
             feed_hash = md5.new(url.netloc)
+            feed_hash.update(url.path)
             if url.username: feed_hash.update(url.username)
             feed_hash = feed_hash.hexdigest()
 
@@ -56,9 +56,10 @@ def add_feed(request):
 
             feed.users.add(request.user)
 
-            # For the feed preview email. I don't like this method but since
-            # it is async...
-            fetch_feed_items(feed, request.user)
+            # work around bs4.element.NavigableString not being serializable
+            feed.title = unicode(feed.title)
+
+            feed_tasks.prepare_preview_email(request.user, feed)
 
             messages.success(request, 'New feed added successfully. Check your inbox for a preview of this feed!')
         else:
