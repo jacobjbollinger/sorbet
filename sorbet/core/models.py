@@ -3,6 +3,7 @@ import datetime
 from uuid import uuid4
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 
 class InvitationManager(models.Manager):
@@ -22,3 +23,8 @@ class Invitation(models.Model):
     invited_at = models.DateField(auto_now_add=True, null=True)
     sent = models.BooleanField()
     email = models.EmailField(null=True, unique=True)
+
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    scheduled_update = models.DateTimeField(default=None, null=True)
+    email_frequency = models.SmallIntegerField(default=24)
