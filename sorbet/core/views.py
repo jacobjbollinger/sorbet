@@ -73,11 +73,16 @@ def invite(request):
     if form.is_valid():
         invitation = form.save()
         if Invitation.objects.limit_reached():
-            messages.warning(request, "Invitation limit for this week has been reached. Your invitation will be sent as soon as possible.")
+            messages.warning(request, "Invitation limit for this week has been "
+                                      "reached. Your invitation will be sent "
+                                      "as soon as possible.")
         else:
-            messages.success(request, "Your invitation has been sent for the given email address. It should arrive shortly.")
-            send_mail('Sorbet invitation', 'http://sorbetapp.com/register/?key=%s' % (invitation.key,), 'noreply@sorbetapp.com',
-                       [invitation.email], fail_silently=False)
+            messages.success(request, "Your invitation has been sent for the "
+                                      "given email address. It should arrive "
+                                      "shortly.")
+            send_mail('Sorbet invitation',
+                      'http://sorbetapp.com/register/?key=%s' % (invitation.key,),
+                      'noreply@sorbetapp.com', [invitation.email], fail_silently=False)
             return HttpResponseRedirect(reverse('core:home'))
     return TemplateResponse(request, u'core/invite.html', {'form': form})
 
