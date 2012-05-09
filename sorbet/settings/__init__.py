@@ -48,6 +48,10 @@ ADMINS = [('Isaac Bythewood', 'isaac@bythewood.me'),
           ('Krzysztof Klimonda', 'kklimonda@syntaxhighlighted.com')]
 MANAGERS = ADMINS
 LOGIN_REDIRECT_URL = '/feeds/'
+PROJECT_APPS = (
+    'sorbet.core',
+    'sorbet.feedmanager',
+)
 
 LOGGING = {
     'version': 1,
@@ -80,6 +84,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_jenkins',
     'gunicorn',
     'compressor',
     'south',

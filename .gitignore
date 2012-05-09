@@ -16,3 +16,6 @@
 /media/
 /static/
 /development.db
+
+# jenkins
+/reports/
