@@ -4,17 +4,24 @@ Sorbet is an open source feed fetcher and sender. Users can create accounts,
 setup lists of feeds, and when these feeds are updated the user will recieve
 an email in their inbox containing the new content.
 
+## Jenkins Build Status
+
+For build information on the latest commit head over to
+[Sorbet on my Jenkins server][0].
+
+[0]: http://jenkins.bythewood.me/job/sorbet/ "Sorbet on Jenkins"
+
 
 ## Helping Out
 
-Check out the [issues page][0] on GitHub or the code itself, if you can help with
+Check out the [issues page][1] on GitHub or the code itself, if you can help with
 anything there it will be greatly appreciated and you'll be added to the list
 of contributors! I won't add you for making a single spelling correction but if
 you found 5 spelling mistakes or rewrote a whole paragraph or rewrote
 the caching engine then you'll be added! You don't have to be a programmer to
 help.
 
-[0]: https://github.com/overshard/sorbet/issues "Sorbet Issues on GitHub"
+[1]: https://github.com/overshard/sorbet/issues "Sorbet Issues on GitHub"
 
 
 ## Contributors
