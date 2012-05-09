@@ -92,6 +92,7 @@ INSTALLED_APPS = (
     'cronjobs',
     'sorbet.core',
     'sorbet.feedmanager',
+    'sorbet.vendor',
 )
 
 AUTHENTICATION_BACKENDS = ['sorbet.core.backends.EmailAuthBackend']
